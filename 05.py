@@ -99,6 +99,7 @@ class Solution(object):
     def longestPalindrome(self, s):
         start, end = 0, 0
         for i in range(len(s)):
+            #考虑到中心奇偶的情况
             left1, right1 = self.expandAroundCenter(s, i, i)
             left2, right2 = self.expandAroundCenter(s, i, i+1)
             if right1-left1 > end-start:
