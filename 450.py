@@ -17,6 +17,7 @@ class Solution(object):
             return root
         if not node.left and not node.right:
             #很奇怪这里会返回错误
+            #这里需要修改父节点的节点才能完全的将孩子节点置为None
             node = None
         elif (not node.left and node.right):
             if prev.left == node:
@@ -73,8 +74,11 @@ class Solution(object):
         else:
             if not root.left and not root.right:
                 root = None
+            #先找中序遍历的后续节点
             elif root.right:
                 root.val = self.successor(root)
+                #最关键的是这一行，除了将待删除的节点的值修改以外，还需要将中序遍历的后续节点置空
+                #因为此时root的值是中序遍历的后续节点的值故可以通过递归置空后续节点
                 root.right = self.deleteNode(root.right, root.val)
             else:
                 root.val = self.presuccessor(root)
