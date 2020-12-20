@@ -1,0 +1,26 @@
+#递归算法的时间复杂度分析
+#递归调用的数量*计算的时间复杂度的乘积
+
+#尾递归：递归调用是递归函数的最后一条指令，并且在函数中应该只有一次递归调用
+#它会爆栈，但是某些程序语言支持尾递归优化可以使其空间开销达到常数级别
+#正好python不行（狗头
+
+eg.
+def sum_non_tail_recursion(ls):
+
+    if len(ls) == 0:
+        return 0
+    
+    # not a tail recursion because it does some computation after the recursive call returned.
+    return ls[0] + sum_non_tail_recursion(ls[1:])
+
+
+def sum_tail_recursion(ls):
+    
+    def helper(ls, acc):
+        if len(ls) == 0:
+            return acc
+        # this is a tail recursion because the final instruction is a recursive call.
+        return helper(ls[1:], ls[0] + acc)
+    
+    return helper(ls, 0)
