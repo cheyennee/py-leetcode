@@ -47,3 +47,11 @@ class Solution(object):
                     queue.append(node.right)
             height += 1
         return height
+
+#解法三：尾递归，看了尾递归自己回来写的，时间98，内存32
+class Solution(object):
+    def maxDepth(self, root):
+        if not root:
+            return 0
+        return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
+    
